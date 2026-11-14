@@ -128,6 +128,9 @@ def login_screen():
 
 if "user" not in st.session_state:
     login_screen()
+    # login_screen returns normally when Supabase is configured but no user has
+    # signed in yet. Stop here so the dashboard never reads a missing session key.
+    st.stop()
 
 USER = st.session_state.user
 USER_ID = USER["id"]
